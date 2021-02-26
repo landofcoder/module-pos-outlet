@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">lofoutlet_outlet_form.lofoutlet_outlet_form_data_source</item>
+            <item name="deps" xsi:type="string">lofoutlet_outlet_form.lofoutlet_outlet_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true"> Outlet Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+<!--        <item name="layout" xsi:type="array">-->
+<!--            <item name="type" xsi:type="string">tabs</item>-->
+<!--        </item>-->
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">outlet_form</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Lof\Outlet\Block\Adminhtml\Outlet\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Lof\Outlet\Block\Adminhtml\Outlet\Edit\DeleteButton</item>
+            <item name="save_and_continue" xsi:type="string">Lof\Outlet\Block\Adminhtml\Outlet\Edit\SaveAndContinue</item>
+            <item name="save" xsi:type="string">Lof\Outlet\Block\Adminhtml\Outlet\Edit\SaveButton</item>
+        </item>
+
+    </argument>
+    <settings>
+<!--        <layout>-->
+<!--            <navContainerName>left</navContainerName>-->
+<!--            <type>tabs</type>-->
+<!--        </layout>-->
+        <deps>
+            <dep>lofoutlet_outlet_form.lofoutlet_outlet_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="lofoutlet_outlet_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Lof\Outlet\Model\Outlet\DataProvider</argument>
+            <argument name="name" xsi:type="string">lofoutlet_outlet_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">outlet_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="lofoutlet/outlet/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="outlet">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <label translate="true">Outlet Information</label>
+        </settings>
+            <!-- This field represents form id and is hidden -->
+            <field name="outlet_id">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="visible" xsi:type="boolean">false</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">contact</item>
+                    </item>
+                </argument>
+            </field>
+
+            <field name="outlet_name">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string">Outlet Name</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+
+            </field>
+            <field name="select_source">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Lof\Outlet\Model\Config\Source\MultiSourceOption</item>
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string">Select Source Warehouse</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">select</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="outlet_address" template="ui/form/field" sortOrder="50" formElement="wysiwyg">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="wysiwygConfigData" xsi:type="array">
+                            <item name="height" xsi:type="string">100px</item>
+                            <item name="add_variables" xsi:type="boolean">true</item>
+                            <item name="add_widgets" xsi:type="boolean">true</item>
+                            <item name="add_images" xsi:type="boolean">true</item>
+                            <item name="add_directives" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Outlet Address</label>
+                    <dataScope>outlet_address</dataScope>
+                </settings>
+                <formElements>
+                    <wysiwyg >
+                        <settings>
+                            <rows>8</rows>
+                            <wysiwyg>true</wysiwyg>
+                        </settings>
+                    </wysiwyg>
+                </formElements>
+            </field>
+            <field name="status">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Lof\Outlet\Model\Config\Source\OutletStatusYesNoOption</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true"> Status</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">lof_pos_outlet</item>
+                        <item name="dataScope" xsi:type="string">status</item>
+                    </item>
+                </argument>
+            </field>
+
+        <field name="select_receipt">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Lof\Outlet\Model\Config\Source\SelectReceiptOption</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Select Receipt</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="default_outlet_shipping_address" sortOrder="40">
+        <settings>
+            <collapsible>true</collapsible>
+
+            <label translate="true">Default outlet shipping address</label>
+        </settings>
+        <field name="firstname">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"> First Name</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+
+        </field>
+        <field name="lastname">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Last Name</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="street">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Street</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="city">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">City</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="country_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"> Country ID</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="region_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"> Region ID</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="post_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"> Post Code</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="telephone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Telephone</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

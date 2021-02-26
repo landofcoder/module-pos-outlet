@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="landofcoder" translate="label" sortOrder="10">
+            <label>Landofcoder</label>
+        </tab>
+        <section id="section_lofpos" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+            <class>separator-top</class>
+            <label>POS</label>
+            <tab>landofcoder</tab>
+            <resource>Lof_Outlet::config_outlet</resource>
+            <group id="outlet" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="11" translate="label">
+                <label>Outlet Configuration</label>
+                <field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+                    <label> Module Enable</label>
+                    <comment>Enable/disable module</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

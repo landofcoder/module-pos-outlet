@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table comment="lof_outlet Table" engine="innodb" name="lof_pos_outlet" resource="default">
+        <column comment="Entity Id" identity="true" name="outlet_id" nullable="false" padding="6" unsigned="false" xsi:type="smallint"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="outlet_id"/>
+        </constraint>
+        <column name="outlet_name" nullable="true" xsi:type="varchar"/>
+        <column name="status" nullable="true" xsi:type="int"/>
+        <column name="assignment" nullable="true" xsi:type="varchar"/>
+        <column name="default_customer" nullable="true" xsi:type="int"/>
+        <column name="outlet_address" nullable="true" xsi:type="varchar"/>
+        <column name="select_source" nullable="true" xsi:type="varchar"/>
+        <column name="firstname" nullable="true" xsi:type="varchar"/>
+        <column name="lastname" nullable="true" xsi:type="varchar"/>
+        <column name="select_receipt" nullable="true" xsi:type="varchar"/>
+        <column name="street" nullable="true" xsi:type="varchar"/>
+        <column name="city" nullable="true" xsi:type="varchar"/>
+        <column name="country_id" nullable="true" xsi:type="varchar"/>
+        <column name="region_id" nullable="true" xsi:type="varchar"/>
+        <column name="post_code" nullable="true" xsi:type="varchar"/>
+        <column name="telephone" nullable="true" xsi:type="varchar"/>
+    </table>
+</schema>

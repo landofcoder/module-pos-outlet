@@ -1,0 +1,26 @@
+{
+    "name": "lof/module-outlet",
+    "description": "",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Landofcoder",
+            "email": "landofcoder@gmail.com",
+            "homepage": "https://landofcoder.com"
+        }
+    ],
+    "version": "1.0.1",
+    "require": {
+        "landofcoder/module-all" : "1.*"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Lof\\Outlet\\": ""
+        }
+    }
+}

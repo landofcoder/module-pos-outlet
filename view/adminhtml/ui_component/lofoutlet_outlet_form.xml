@@ -3,51 +3,42 @@
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">lofoutlet_outlet_form.lofoutlet_outlet_form_data_source</item>
-            <item name="deps" xsi:type="string">lofoutlet_outlet_form.lofoutlet_outlet_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true"> Outlet Information</item>
-        <item name="template" xsi:type="string">templates/form/collapsible</item>
-<!--        <item name="layout" xsi:type="array">-->
-<!--            <item name="type" xsi:type="string">tabs</item>-->
-<!--        </item>-->
-        <item name="config" xsi:type="array">
-            <item name="dataScope" xsi:type="string">data</item>
-            <item name="namespace" xsi:type="string">outlet_form</item>
-        </item>
-        <item name="buttons" xsi:type="array">
-            <item name="back" xsi:type="string">Lof\Outlet\Block\Adminhtml\Outlet\Edit\BackButton</item>
-            <item name="delete" xsi:type="string">Lof\Outlet\Block\Adminhtml\Outlet\Edit\DeleteButton</item>
-            <item name="save_and_continue" xsi:type="string">Lof\Outlet\Block\Adminhtml\Outlet\Edit\SaveAndContinue</item>
-            <item name="save" xsi:type="string">Lof\Outlet\Block\Adminhtml\Outlet\Edit\SaveButton</item>
-        </item>
-
+        <item name="label" xsi:type="string" translate="true">General Information</item>
     </argument>
     <settings>
-<!--        <layout>-->
-<!--            <navContainerName>left</navContainerName>-->
-<!--            <type>tabs</type>-->
-<!--        </layout>-->
+        <buttons>
+            <button name="back" class="Lof\Outlet\Block\Adminhtml\Outlet\Edit\BackButton"/>
+            <button name="delete" class="Lof\Outlet\Block\Adminhtml\Outlet\Edit\DeleteButton"/>
+            <button name="save" class="Lof\Outlet\Block\Adminhtml\Outlet\Edit\SaveButton"/>
+            <button name="save_and_continue" class="Lof\Outlet\Block\Adminhtml\Outlet\Edit\SaveAndContinue"/>
+        </buttons>
+        <namespace>lofoutlet_outlet_form</namespace>
+        <dataScope>data</dataScope>
+        <layout>
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout>
         <deps>
             <dep>lofoutlet_outlet_form.lofoutlet_outlet_form_data_source</dep>
         </deps>
     </settings>
+
     <dataSource name="lofoutlet_outlet_form_data_source">
-        <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Lof\Outlet\Model\Outlet\DataProvider</argument>
-            <argument name="name" xsi:type="string">lofoutlet_outlet_form_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">outlet_id</argument>
-            <argument name="requestFieldName" xsi:type="string">id</argument>
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="submit_url" xsi:type="url" path="lofoutlet/outlet/save"/>
-                </item>
-            </argument>
-        </argument>
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
             </item>
         </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider name="lofoutlet_outlet_form_data_source" class="Lof\Outlet\Model\Outlet\DataProvider">
+            <settings>
+                <requestFieldName>outlet_id</requestFieldName>
+                <primaryFieldName>outlet_id</primaryFieldName>
+            </settings>
+        </dataProvider>
     </dataSource>
 
     <fieldset name="outlet">

@@ -1,32 +1,31 @@
 <?php
+/**
+ * Copyright © Chinh All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
 namespace Lof\Outlet\Model\Outlet;
 
 use Lof\Outlet\Model\ResourceModel\Outlet\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Ui\DataProvider\AbstractDataProvider;
 
-class DataProvider extends AbstractDataProvider
+class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
-    /**
-     * @var \Lof\Outlet\Model\ResourceModel\outlet\Collection
-     */
+
     protected $collection;
 
-    /**
-     * @var DataPersistorInterface
-     */
     protected $dataPersistor;
 
-    /**
-     * @var array
-     */
     protected $loadedData;
 
     /**
+     * Constructor
+     *
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
-     * @param CollectionFactory $outetCollectionFactory
+     * @param CollectionFactory $collectionFactory
      * @param DataPersistorInterface $dataPersistor
      * @param array $meta
      * @param array $data
@@ -35,26 +34,14 @@ class DataProvider extends AbstractDataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        CollectionFactory $outetCollectionFactory,
+        CollectionFactory $collectionFactory,
         DataPersistorInterface $dataPersistor,
         array $meta = [],
         array $data = []
     ) {
-        $this->collection = $outetCollectionFactory->create();
+        $this->collection = $collectionFactory->create();
         $this->dataPersistor = $dataPersistor;
-        $this->meta = $this->prepareMeta($this->meta);
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-    }
-
-    /**
-     * Prepares Meta
-     *
-     * @param array $meta
-     * @return array
-     */
-    public function prepareMeta(array $meta)
-    {
-        return $meta;
     }
 
     /**
@@ -68,9 +55,18 @@ class DataProvider extends AbstractDataProvider
             return $this->loadedData;
         }
         $items = $this->collection->getItems();
-        $ruleId = '';
-        foreach ($items as $page) {
-            $this->loadedData[$page->getId()] = $page->getData();
+        foreach ($items as $model) {
+            $id = $model->getId();
+            $this->loadedData[$id]['outlet'] = $model->getData();
+            $this->loadedData[$id]['default_outlet_shipping_address'] = $model->getData();
+        }
+        $data = $this->dataPersistor->get('lof_pos_outlet');
+
+        if (!empty($data)) {
+            $model = $this->collection->getNewEmptyItem();
+            $model->setData($data);
+            $this->loadedData[$model->getId()] = $model->getData();
+            $this->dataPersistor->clear('lof_pos_outlet');
         }
 
         return $this->loadedData;

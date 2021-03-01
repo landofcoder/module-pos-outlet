@@ -2,10 +2,11 @@
 
 namespace Lof\Outlet\Model\Config\Source;
 
-use Magento\Eav\Model\ResourceModel\Entity\Attribute\OptionFactory;
-use Magento\Framework\DB\Ddl\Table;
+use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
+use Magento\Framework\Module\Manager;
+use Magento\Inventory\Model\ResourceModel\Source\Collection;
 
-class MultiSourceOption extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
+class MultiSourceOption extends AbstractSource
 
 {
     protected $sourceData;
@@ -13,11 +14,13 @@ class MultiSourceOption extends \Magento\Eav\Model\Entity\Attribute\Source\Abstr
 
     /**
      * Constructor call.
-     * @param \Magento\Inventory\Model\ResourceModel\Source\Collection $sourceData
+     * @param Collection $sourceData
+     * @param Manager $moduleManager
      */
     public function __construct(
-        \Magento\Inventory\Model\ResourceModel\Source\Collection $sourceData,
-        \Magento\Framework\Module\Manager $moduleManager)
+        Collection $sourceData,
+        Manager $moduleManager
+    )
     {
         $this->sourceData = $sourceData;
         $this->_moduleManager = $moduleManager;
@@ -30,14 +33,8 @@ class MultiSourceOption extends \Magento\Eav\Model\Entity\Attribute\Source\Abstr
      */
     public function getAllOptions()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
-        $collectionFactory = $objectManager->create('\Magento\Inventory\Model\SourceFactory');
-        $model = $collectionFactory->create();
-        $getDataWarehouse = $model->getCollection()->getData();
-        $getDataSource = $this->sourceData->getData();
-        $allWarehouse = array_merge($getDataWarehouse, $getDataSource);
-        foreach ($allWarehouse as $item) {
+        $dataSources = $this->sourceData->getData();
+        foreach ($dataSources as $item) {
             if (isset($item['source_code'])) {
                 $this->_options[] = [
                     'label' => $item['name'], 'value' => $item['source_code']

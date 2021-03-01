@@ -2,31 +2,56 @@
 
 namespace Lof\Outlet\Controller\Adminhtml\Outlet;
 
-use Lof\Outlet\Controller\Adminhtml\Outlet;
+use Lof\Outlet\Model\OutletFactory;
 use Magento\Backend\App\Action;
 use Magento\Cms\Controller\Adminhtml\Page\PostDataProcessor;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
 
+/**
+ * Class Save
+ * @package Lof\Outlet\Controller\Adminhtml\Outlet
+ */
 class Save extends Action
 
 {
+    /**
+     * @var OutletFactory
+     */
     protected $outletfactory;
+    /**
+     * @var PostDataProcessor
+     */
     protected $dataProcessor;
-    public function __construct(Action\Context $context,
-                                \Lof\Outlet\Model\OutletFactory $outletFactory,
-                                PostDataProcessor $dataProcessor)
-    {
+
+    /**
+     * Save constructor.
+     * @param Action\Context $context
+     * @param OutletFactory $outletFactory
+     * @param PostDataProcessor $dataProcessor
+     */
+    public function __construct(
+        Action\Context $context,
+        OutletFactory $outletFactory,
+        PostDataProcessor $dataProcessor
+    ) {
         parent::__construct($context);
-        $this->outletfactory=$outletFactory;
-        $this->dataProcessor=$dataProcessor;
+        $this->outletfactory = $outletFactory;
+        $this->dataProcessor = $dataProcessor;
     }
 
 
+    /**
+     * @return ResponseInterface|Redirect|ResultInterface|void
+     */
     public function execute()
     {
-        $data = $this->getRequest()->getPostValue();
+        $dataPost = $this->getRequest()->getPostValue();
         $resultRedirect = $this->resultRedirectFactory->create();
-        if ($data) {
+        if ($dataPost) {
 //            $data = $this->dataProcessor->filter($data);
+            $data = array_merge($dataPost['outlet'], $dataPost['default_outlet_shipping_address']) ;
             if (empty($data['outlet_id'])) {
                 $data['outlet_id'] = null;
             }
@@ -43,16 +68,17 @@ class Save extends Action
                 }
             }
 
-          $model->setData($data);
-        // Check if 'Save and Continue'
-                    if ($this->getRequest()->getParam('back')) {
-                        $this->_redirect('*/outlet/edit', ['outlet_id' => $model->getId(), '_current' => true]);
-                        return;
-                    }
+            $model->setData($data);
+
 
             try {
                 $model->save();
                 $this->messageManager->addSuccessMessage(__('You saved the Outlet.'));
+                // Check if 'Save and Continue'
+                if ($this->getRequest()->getParam('back')) {
+                    $this->_redirect('*/outlet/edit', ['id' => $model->getId(), '_current' => true]);
+                    return;
+                }
                 return $resultRedirect->setPath('*/*/index');
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
@@ -64,6 +90,7 @@ class Save extends Action
         }
         return $resultRedirect->setPath('*/*/index');
     }
+
     /**
      * Check the permission to run it
      *

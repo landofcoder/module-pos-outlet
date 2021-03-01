@@ -35,7 +35,7 @@
         </settings>
         <dataProvider name="lofoutlet_outlet_form_data_source" class="Lof\Outlet\Model\Outlet\DataProvider">
             <settings>
-                <requestFieldName>outlet_id</requestFieldName>
+                <requestFieldName>id</requestFieldName>
                 <primaryFieldName>outlet_id</primaryFieldName>
             </settings>
         </dataProvider>

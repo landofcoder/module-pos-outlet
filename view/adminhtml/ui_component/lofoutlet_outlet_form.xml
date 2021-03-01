@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">lofoutlet_outlet_form.lofoutlet_outlet_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
     </argument>
+
     <settings>
         <buttons>
             <button name="back" class="Lof\Outlet\Block\Adminhtml\Outlet\Edit\BackButton"/>
@@ -58,7 +60,6 @@
                     </item>
                 </argument>
             </field>
-
             <field name="outlet_name">
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
@@ -71,7 +72,6 @@
                         </item>
                     </item>
                 </argument>
-
             </field>
             <field name="select_source">
                 <argument name="data" xsi:type="array">
@@ -137,10 +137,9 @@
             </argument>
         </field>
     </fieldset>
+
     <fieldset name="default_outlet_shipping_address" sortOrder="40">
         <settings>
-            <collapsible>true</collapsible>
-
             <label translate="true">Default outlet shipping address</label>
         </settings>
         <field name="firstname">
@@ -155,7 +154,6 @@
                     </item>
                 </item>
             </argument>
-
         </field>
         <field name="lastname">
             <argument name="data" xsi:type="array">

@@ -1,0 +1,27 @@
+
+type Query {
+
+    LofOutlet (id: Int!) : Outlet @resolver( class: "Lof\\Outlet\\Model\\Resolver\\Outlet")
+
+}
+
+type Outlet {
+    outlet_id  : Int
+    outlet_name  : String
+    status : Int
+    assignment : String
+    default_customer : String
+    outlet_address: String
+    select_source: String
+    firstname: String
+    lastname: String
+    select_receipt: Int
+    street: String
+    city: String
+    country_id: String
+    region_id: String
+    post_code: String
+    telephone: String
+
+}
+

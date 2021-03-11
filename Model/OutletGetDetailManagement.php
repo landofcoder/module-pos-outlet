@@ -4,34 +4,41 @@ namespace Lof\Outlet\Model;
 use Lof\Outlet\Api\OutletGetDetailManagementInterface;
 use Lof\Outlet\Model\ResourceModel\Outlet\CollectionFactory;
 
+/**
+ * Class OutletGetDetailManagement
+ * @package Lof\Outlet\Model
+ */
 class OutletGetDetailManagement implements OutletGetDetailManagementInterface
 {
 
-    protected $Outlet;
+    /**
+     * @var OutletFactory
+     */
+    protected $outlet;
 
+    /**
+     * @var
+     */
     protected $collectionFactory;
 
-
+    /**
+     * OutletGetDetailManagement constructor.
+     * @param OutletFactory $outlet
+     */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Lof\Outlet\Model\OutletFactory $Outlet,
-        CollectionFactory $collectionFactory
-
+        OutletFactory $outlet
     ) {
-
-        $this->collectionFactory = $collectionFactory;
-        $this->Outlet = $Outlet;
+        $this->outlet = $outlet;
     }
+
+    /**
+     * @param $id
+     * @return array|mixed
+     */
     public function getDetailOutlet($id)
     {
-        $collection = $this->collectionFactory->create();
-        $collection->addFieldToFilter('outlet_id',$id);
-        $arrResult = [];
-        foreach ($collection->getItems() as $outlet) {
-
-             $arrResult[]['data'] = $outlet->getData();
-        }
-        return $arrResult;
+        $outlet = $this->outlet->create()->load($id);
+        return $outlet->getData();
     }
 
 }

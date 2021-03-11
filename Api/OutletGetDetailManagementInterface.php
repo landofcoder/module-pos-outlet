@@ -2,12 +2,16 @@
 
 namespace Lof\Outlet\Api;
 
+/**
+ * Interface OutletGetDetailManagementInterface
+ * @package Lof\Outlet\Api
+ */
 interface OutletGetDetailManagementInterface
 {
+
     /**
-     *  GET for OutletGetDetail api
-     * @param string $id
-     * @return \Lof\Outlet\Api\Data\OutletInterface
+     * @param $id
+     * @return mixed
      */
     public function getDetailOutlet($id);
 }

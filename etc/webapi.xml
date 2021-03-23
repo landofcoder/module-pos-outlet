@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route method="GET" url="/V1/lof-outlet/get-detail-outlet">
+    <route method="GET" url="/V1/lof-outlet/get-detail-outlet/:id">
         <service class="Lof\Outlet\Api\OutletGetDetailManagementInterface" method="getDetailOutlet"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Lof_Outlet::outlet_view"/>
         </resources>
     </route>
 </routes>

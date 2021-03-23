@@ -1,6 +1,6 @@
 <?php
 
-namespace Lof\Outlet\Block\Adminhtml\outlet\Edit;
+namespace Lof\Outlet\Block\Adminhtml\Outlet\Edit;
 
 use Lof\Outlet\Model\OutletFactory;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;

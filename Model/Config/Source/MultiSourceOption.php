@@ -2,10 +2,11 @@
 
 namespace Lof\Outlet\Model\Config\Source;
 
-use Magento\Eav\Model\ResourceModel\Entity\Attribute\OptionFactory;
-use Magento\Framework\DB\Ddl\Table;
+use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
+use Magento\Framework\Module\Manager;
+use Magento\Inventory\Model\ResourceModel\Source\Collection;
 
-class MultiSourceOption extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
+class MultiSourceOption extends AbstractSource
 
 {
     protected $sourceData;
@@ -13,11 +14,13 @@ class MultiSourceOption extends \Magento\Eav\Model\Entity\Attribute\Source\Abstr
 
     /**
      * Constructor call.
-     * @param \Magento\Inventory\Model\ResourceModel\Source\Collection $sourceData
+     * @param Collection $sourceData
+     * @param Manager $moduleManager
      */
     public function __construct(
-        \Magento\Inventory\Model\ResourceModel\Source\Collection $sourceData,
-        \Magento\Framework\Module\Manager $moduleManager)
+        Collection $sourceData,
+        Manager $moduleManager
+    )
     {
         $this->sourceData = $sourceData;
         $this->_moduleManager = $moduleManager;
@@ -30,27 +33,15 @@ class MultiSourceOption extends \Magento\Eav\Model\Entity\Attribute\Source\Abstr
      */
     public function getAllOptions()
     {
-        if ($this->_moduleManager->isEnabled('Lof_Inventory')) {
-            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
-            $collectionFactory = $objectManager->create('\Lof\Inventory\Model\WarehouseFactory');
-            $model = $collectionFactory->create();
-            $getDataWarehouse = $model->getCollection()->getData();
-            $getDataSource = $this->sourceData->getData();
-            $allWarehouse = array_merge($getDataWarehouse, $getDataSource);
-            foreach ($allWarehouse as $item) {
-                if (isset($item['warehouse_id'])) {
-                    $this->_options[] = [
-                        'label' => $item['warehouse_name'], 'value' => $item['warehouse_code']
-                    ];
-                } elseif (isset($item['source_code'])) {
-                    $this->_options[] = [
-                        'label' => $item['name'], 'value' => $item['source_code']
-                    ];
-                }
+        $dataSources = $this->sourceData->getData();
+        foreach ($dataSources as $item) {
+            if (isset($item['source_code'])) {
+                $this->_options[] = [
+                    'label' => $item['name'], 'value' => $item['source_code']
+                ];
             }
-        return $this->_options;
         }
+        return $this->_options;
     }
 
     /**

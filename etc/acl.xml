@@ -2,18 +2,18 @@
 <!--
 /**
  * Landofcoder
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
  * http://www.landofcoder.com/license-agreement.html
- * 
+ *
  * DISCLAIMER
- * 
+ *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
- * 
+ *
  * @category   Landofcoder
  * @package    Lof_Outlet
  * @copyright  Copyright (c) 2020 Landofcoder (http://www.landofcoder.com/)
@@ -29,6 +29,7 @@
                         <resource id="Lof_Outlet::outlet_edit" title="Edit Outlet" sortOrder="10" />
                         <resource id="Lof_Outlet::outlet_save" title="Save Outlet" sortOrder="20" />
                         <resource id="Lof_Outlet::outlet_delete" title="Delete Outlet" sortOrder="30" />
+                        <resource id="Lof_Outlet::outlet_view" title="View Outlet" sortOrder="40" />
                     </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">

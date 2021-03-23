@@ -3,6 +3,8 @@
 namespace Lof\Outlet\Controller\Adminhtml\Outlet;
 
 use Lof\Outlet\Model\Outlet;
+use Magento\Backend\Model\View\Result\Page;
+use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Backend\App\Action;
 
@@ -42,12 +44,12 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
     /**
      * Init actions
      *
-     * @return \Magento\Backend\Model\View\Result\Page
+     * @return Page
      */
     protected function _initAction()
     {
         // load layout, set active menu and breadcrumbs
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
 //        $resultPage->setActiveMenu('Magento_Cms::cms_page')
 //            ->addBreadcrumb(__('CMS'), __('CMS'))
@@ -58,7 +60,7 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
     /**
      * Edit CMS page
      *
-     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Backend\Model\View\Result\Redirect
+     * @return Page|Redirect
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function execute()
@@ -81,7 +83,7 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
         $this->_coreRegistry->register('lof_pos_outlet', $model);
 
         // 5. Build edit form
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        /** @var Page $resultPage */
         $resultPage = $this->_initAction();
         $resultPage->addBreadcrumb(
             $id ? __('Edit Outlet') : __('Outlet'),

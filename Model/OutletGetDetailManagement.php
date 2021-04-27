@@ -32,7 +32,7 @@ class OutletGetDetailManagement implements OutletGetDetailManagementInterface
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return array|mixed
      */
     public function getDetailOutlet($id)

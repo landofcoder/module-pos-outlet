@@ -1,6 +1,6 @@
 {
-    "name": "lof/module-outlet",
-    "description": "",
+    "name": "landofcoder/module-outlet",
+    "description": "Magento 2 module manage outlet, stores for POS app",
     "type": "magento2-module",
     "license": "MIT",
     "authors": [
